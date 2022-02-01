@@ -7,6 +7,7 @@ export const productValidation = (req: Request, res: Response, next: NextFunctio
     try {
         if (!instanceOfProduct(req.body))
             throw new Error('The shipped product is not valid!');
+        next();
     } catch (error) {
         next(error)
     }
