@@ -5,9 +5,10 @@ import { Database } from '../database';
 export const products = express.Router();
 const database = new Database();
 
-products.post('/', productValidation, (req, res) => {
-    database.addProduct(req.body);
-    res.end();
+products.post('/', productValidation, (req, res, next) => {
+    database.addProduct(req.body)
+        .then(message => res.send(message))
+        .catch(error => next(error))
 })
 
 products.get('/:id', (req, res, next) => {
@@ -22,7 +23,7 @@ products.put('/:id', productValidation, (req, res, next) => {
     const id = parseInt(req.params.id);
 
     database.updateProduct(id, req.body)
-        .then(() => res.end())
+        .then((message) => res.send(message))
         .catch(error => next(error))
 })
 
@@ -30,6 +31,6 @@ products.delete('/:id', (req, res, next) => {
     const id = parseInt(req.params.id);
 
     database.deleteProduct(id)
-        .then(() => res.end())
+        .then((message) => res.send(message))
         .catch(error => next(error));
 })
