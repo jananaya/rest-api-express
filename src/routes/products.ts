@@ -6,14 +6,14 @@ export const products = express.Router();
 const database = new Database();
 
 products.post('/', productValidation, (req, res) => {
-    database.addRegister(req.body);
+    database.addProduct(req.body);
     res.end();
 })
 
 products.get('/:id', (req, res, next) => {
     const id = parseInt(req.params.id);
 
-    database.getRegister(id)
+    database.getProduct(id)
         .then(product => res.json(product))
         .catch(error => next(error))
 })
@@ -21,7 +21,7 @@ products.get('/:id', (req, res, next) => {
 products.put('/:id', productValidation, (req, res, next) => {
     const id = parseInt(req.params.id);
 
-    database.updateRegister(id, req.body)
+    database.updateProduct(id, req.body)
         .then(() => res.end())
         .catch(error => next(error))
 })
@@ -29,7 +29,7 @@ products.put('/:id', productValidation, (req, res, next) => {
 products.delete('/:id', (req, res, next) => {
     const id = parseInt(req.params.id);
 
-    database.deleteRegister(id)
+    database.deleteProduct(id)
         .then(() => res.end())
         .catch(error => next(error));
 })

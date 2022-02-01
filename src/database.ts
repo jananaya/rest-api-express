@@ -21,7 +21,7 @@ export class Database {
         });
     }
 
-    addRegister(data: Product) {
+    addProduct(data: Product) {
         const insertQuery = `INSERT INTO ${this.tableName} (\`description\`, \`value\`)
                              VALUES (?, ?)`;
         const query = mysql.format(insertQuery, [data.description, data.value]);
@@ -34,7 +34,7 @@ export class Database {
         });
     }
 
-    getRegister(id: number): Promise<Product> {
+    getProduct(id: number): Promise<Product> {
         const query = `SELECT * FROM ${this.tableName} WHERE id=${id}`;
 
         return new Promise<Product>((resolve, reject) => {
@@ -45,7 +45,7 @@ export class Database {
         });
     }
 
-    deleteRegister(id: number) {
+    deleteProduct(id: number) {
         const query = `DELETE FROM ${this.tableName} WHERE id=${id}`;
 
         return new Promise((resolve, reject) => {
@@ -56,7 +56,7 @@ export class Database {
         });
     }
 
-    updateRegister(id: number, data: Product) {
+    updateProduct(id: number, data: Product) {
         const insertQuery = `UPDATE ${this.tableName} SET description=?, value=? WHERE id=${id}`;
         const query = mysql.format(insertQuery, [data.description, data.value]);
 
