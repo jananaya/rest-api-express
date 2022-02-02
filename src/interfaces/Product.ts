@@ -4,5 +4,9 @@ export interface Product {
 }
 
 export const instanceOfProduct = (object: any): object is Product => {
-    return 'description' in object && 'value' in object;
+    
+    if ('description' in object  && 'value' in object)
+        return typeof object.description === 'string' && typeof object.value === 'number';
+   
+    return false;
 }
