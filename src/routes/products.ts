@@ -7,7 +7,10 @@ const database = new Database();
 
 products.post('/', productValidation, (req, res, next) => {
     database.addProduct(req.body)
-        .then(message => res.send(message))
+        .then(message => res.json({
+            status: 'SUCCESS',
+            message: message
+        }))
         .catch(error => next(error))
 })
 
@@ -23,7 +26,10 @@ products.put('/:id', productValidation, (req, res, next) => {
     const id = parseInt(req.params.id);
 
     database.updateProduct(id, req.body)
-        .then((message) => res.send(message))
+        .then((message) => res.json({
+            status: 'SUCCESS',
+            message: message
+        }))
         .catch(error => next(error))
 })
 
@@ -31,6 +37,9 @@ products.delete('/:id', (req, res, next) => {
     const id = parseInt(req.params.id);
 
     database.deleteProduct(id)
-        .then((message) => res.send(message))
+        .then((message) => res.json({
+            status: 'SUCCESS',
+            message: message
+        }))
         .catch(error => next(error));
 })
