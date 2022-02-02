@@ -21,6 +21,10 @@ export class Database {
         });
     }
 
+    private notExistError(id: number): Error {
+        return new Error(`the product with id \"${id}\" not exist on the database!`);
+    }
+
     addProduct(data: Product) {
         const insertQuery = `INSERT INTO ${this.tableName} (\`description\`, \`value\`)
                              VALUES (?, ?)`;
@@ -49,9 +53,15 @@ export class Database {
         const query = `DELETE FROM ${this.tableName} WHERE id=${id}`;
 
         return new Promise((resolve, reject) => {
-            this.connection.query(query, (err) => {
-                if (err) reject(err);
-                else resolve('Product deleted successfully!');
+            this.connection.query(query, (err, result) => {
+                const productExist = result.affectedRows != 0;
+
+                if (err)
+                    reject(err);
+                else if (!productExist)
+                    reject(this.notExistError(id));
+                else
+                    resolve('Product deleted successfully!');
             })
         });
     }
@@ -61,10 +71,16 @@ export class Database {
         const query = mysql.format(insertQuery, [data.description, data.value]);
 
         return new Promise((resolve, reject) => {
-            this.connection.query(query, (err) => {
-                if (err) reject(err);
-                else resolve('Product created successfully!');
+            this.connection.query(query, (err, result) => {
+                const productExist = result.affectedRows != 0;
+
+                if (err)
+                    reject(err);
+                else if (!productExist)
+                    reject(this.notExistError(id));
+                else
+                    resolve('Product updated successfully!');
             })
-        })
+        });
     }
 }
