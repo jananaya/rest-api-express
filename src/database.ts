@@ -27,7 +27,7 @@ export class Database {
         return new Error(`the product with id \"${id}\" not exist on the database!`);
     }
 
-    addProduct(data: Product) {
+    addProduct(data: Product): Promise<string> {
         const insertQuery = `INSERT INTO ${this.tableName} (\`description\`, \`value\`)
                              VALUES (?, ?)`;
         const query = mysql.format(insertQuery, [data.description, data.value]);
@@ -51,7 +51,7 @@ export class Database {
         });
     }
 
-    deleteProduct(id: number) {
+    deleteProduct(id: number): Promise<string> {
         const query = `DELETE FROM ${this.tableName} WHERE id=${id}`;
 
         return new Promise((resolve, reject) => {
@@ -68,7 +68,7 @@ export class Database {
         });
     }
 
-    updateProduct(id: number, data: Product) {
+    updateProduct(id: number, data: Product): Promise<string> {
         const insertQuery = `UPDATE ${this.tableName} SET description=?, value=? WHERE id=${id}`;
         const query = mysql.format(insertQuery, [data.description, data.value]);
 
