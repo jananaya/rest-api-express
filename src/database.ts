@@ -1,10 +1,12 @@
 import * as mysql from 'mysql';
-import { Connection } from 'mysql';
 import { Product } from './interfaces/Product';
-import 'dotenv/config';
+import * as dotenv from 'dotenv';
+import path from 'path';
+
+dotenv.config({ path: path.resolve(__dirname, '../config/.env') });
 
 export class Database {
-    private connection: Connection;
+    private connection: mysql.Connection;
     private tableName: string;
 
     constructor() {
