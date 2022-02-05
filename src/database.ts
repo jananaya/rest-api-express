@@ -1,5 +1,5 @@
 import * as mysql from 'mysql';
-import { Product } from './interfaces/Product';
+import { IProduct } from './domain/interfaces/IProduct';
 import * as dotenv from 'dotenv';
 import path from 'path';
 
@@ -27,7 +27,7 @@ export class Database {
         return new Error(`the product with id \"${id}\" not exist on the database!`);
     }
 
-    addProduct(data: Product): Promise<string> {
+    addProduct(data: IProduct): Promise<string> {
         const insertQuery = `INSERT INTO ${this.tableName} (\`description\`, \`value\`)
                              VALUES (?, ?)`;
         const query = mysql.format(insertQuery, [data.description, data.value]);
@@ -40,10 +40,10 @@ export class Database {
         });
     }
 
-    getProduct(id: number): Promise<Product> {
+    getProduct(id: number): Promise<IProduct> {
         const query = `SELECT * FROM ${this.tableName} WHERE id=${id}`;
 
-        return new Promise<Product>((resolve, reject) => {
+        return new Promise<IProduct>((resolve, reject) => {
             this.connection.query(query, (err, result) => {
                 if (err) reject(err);
                 else resolve(result);
@@ -68,7 +68,7 @@ export class Database {
         });
     }
 
-    updateProduct(id: number, data: Product): Promise<string> {
+    updateProduct(id: number, data: IProduct): Promise<string> {
         const insertQuery = `UPDATE ${this.tableName} SET description=?, value=? WHERE id=${id}`;
         const query = mysql.format(insertQuery, [data.description, data.value]);
 
