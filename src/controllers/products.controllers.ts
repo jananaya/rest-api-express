@@ -4,7 +4,7 @@ import {responseSuccessBody} from '../utils/responseSuccessBody';
 
 const database = new Database();
 
-export namespace productControllers {
+export namespace productsControllers {
     export const createProduct = (req: Request, res: Response, next: NextFunction) => {
         database.addProduct(req.body)
             .then(message => res.json(responseSuccessBody(message)))
