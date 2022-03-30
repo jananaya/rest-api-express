@@ -2,7 +2,7 @@ import * as mysql from 'mysql';
 import * as dotenv from 'dotenv';
 import path from 'path';
 
-dotenv.config({ path: path.resolve(__dirname, '../config/.env') });
+dotenv.config({ path: path.resolve(__dirname, '../../config/.env') });
 
 export class Database {
     private connection: mysql.Connection;
