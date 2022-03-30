@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "src/index.ts",
-  "scripts": {
-    "prod": "tsc && cd build && node index.js"
-  },
+  "scripts": {},
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -18,7 +16,7 @@
   "devDependencies": {
     "@types/express": "^4.17.13",
     "@types/morgan": "^1.9.3",
-    "@types/mysql": "^2.15.20",
+    "@types/mysql": "^2.15.21",
     "@types/node": "^17.0.15",
     "nodemon": "^2.0.15"
   }
