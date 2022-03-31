@@ -1,7 +1,7 @@
 import { NextFunction } from 'express';
 import { Request } from 'express';
 import { Response } from 'express';
-import { meetsIProduct } from '../domain/meetsIProduct';
+import { meetsIProduct } from '../utils/meetsIProduct';
 
 export namespace productsMiddlewares {
     export const validate = (req: Request, res: Response, next: NextFunction) => {
