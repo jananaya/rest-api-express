@@ -1,4 +1,5 @@
 export interface IProductDTO {
-    description: string;
-    value: number;
+    getId(): number;
+    getDescription(): string;
+    getValue(): number;
 }

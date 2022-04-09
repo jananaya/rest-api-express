@@ -1,27 +1,37 @@
 import { IProductDTO } from '../interfaces/IProductDTO';
 
-export class ProductDTO implements IProductDTO{
-    private _description: string;
-    private _value: number;
+export class ProductDTO implements IProductDTO {
+    private id: number;
+    private description: string;
+    private value: number;
 
-    constructor(description: string, value: number) {
-        this._description = description;
-        this._value = value;
+    constructor(id: number, description: string, value: number) {
+        this.id = id;
+        this.description = description;
+        this.value = value;
     }
 
-    get description(): string {
-        return this._description;
+    getId(): number {
+        return this.id;
     }
 
-    set description(description: string) {
-        this._description = description;
+    setId(id: number) {
+        this.id = id;
     }
 
-    get value(): number {
-        return this._value;
+    getDescription(): string {
+        return this.description;
     }
 
-    set value(value: number) {
-        this._value = value;
+    setDescription(description: string) {
+        this.description = description;
+    }
+
+    getValue(): number {
+        return this.value;
+    }
+
+    setValue(value: number) {
+        this.value = value;
     }
 }
