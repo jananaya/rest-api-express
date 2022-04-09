@@ -11,7 +11,7 @@ export class ProductRepo implements IProductRepo {
         return this.database.createRegister(this.TABLE_NAME, product);
     }
 
-    read(id: number): Promise<any> {
+    readByID(id: number): Promise<any> {
         return this.database.findRegisterById(this.TABLE_NAME, id);
     }
 

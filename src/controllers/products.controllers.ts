@@ -16,7 +16,7 @@ export namespace productsControllers {
 
     export const readProduct = (req: Request, res: Response, next: NextFunction) => {
         const id = parseInt(req.params.id);
-        const productPromise = productRepo.read(id);
+        const productPromise = productRepo.readByID(id);
 
         productPromise
             .then(product => res.json(ProductMapper.toDTO(product)))
