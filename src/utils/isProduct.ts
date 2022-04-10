@@ -1,6 +1,4 @@
-import { IProductDTO } from '../interfaces/IProductDTO';
-
-export const meetsIProduct = (object: any): object is IProductDTO => {
+export const isProduct = (object: any): boolean => {
     if ('description' in object  && 'value' in object)
         return typeof object.description === 'string' && typeof object.value === 'number';
         
