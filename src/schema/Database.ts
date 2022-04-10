@@ -39,13 +39,17 @@ export class Database {
         })
     }
 
-    private getResultPromise(query: string): Promise<any> {
+    private getResultPromise(query: string, formatResult?: Function): Promise<any> {
         return new Promise((resolve, reject) => {
             this.connection.query(query, (error, result) => {
                 if (error)
                     reject(error);
-                else
-                    resolve(result[0])
+                else {
+                    if (formatResult)
+                        resolve(formatResult(result));
+                    else
+                        resolve(result);
+                }
             })
         })
     }
@@ -104,7 +108,7 @@ export class Database {
 
     findRegisterById(tableName: string, id: number): Promise<any> {
         const query = `SELECT * FROM ${tableName} WHERE id=${id}`;
-        return this.getResultPromise(query);
+        return this.getResultPromise(query, (e: any) => e[0]);
     }
 
     async updateRegister(tableName: string, id: number, obj: object) {
@@ -119,5 +123,10 @@ export class Database {
     deleteRegister(tableName: string, id: number) {
         const query = `DELETE FROM ${tableName} WHERE id=${id}`;
         return this.getMessagePromise(query, '');
+    }
+
+    getAllRegisters(table: string) {
+        const query = `SELECT * FROM ${ table }`;
+        return this.getResultPromise(query);
     }
 }
