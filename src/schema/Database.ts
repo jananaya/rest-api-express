@@ -108,9 +108,7 @@ export class Database {
 
     findRegisterById(tableName: string, id: number): Promise<any> {
         const query = `SELECT * FROM ${tableName} WHERE id=${id}`;
-        return this.getResultPromise(query, (e: any) => {
-            return e[0];
-        });
+        return this.getResultPromise(query, (e: any) => e[0]);
     }
 
     async updateRegister(tableName: string, id: number, obj: object) {
