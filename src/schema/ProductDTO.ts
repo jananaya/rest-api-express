@@ -1,22 +1,22 @@
 import { IProductDTO } from '../interfaces/IProductDTO';
 
 export class ProductDTO implements IProductDTO {
-    private id: number;
     private description: string;
     private value: number;
+    private imagePath: string;
 
-    constructor(id: number, description: string, value: number) {
-        this.id = id;
+    constructor(description: string, value: number, imagePath: string) {
         this.description = description;
         this.value = value;
+        this.imagePath = imagePath;
     }
 
-    getId(): number {
-        return this.id;
+    getImagePath(): string {
+        return this.imagePath;   
     }
 
-    setId(id: number) {
-        this.id = id;
+    setImagePath(path: string) {
+        this.imagePath = path;
     }
 
     getDescription(): string {
