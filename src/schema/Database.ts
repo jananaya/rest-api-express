@@ -100,7 +100,7 @@ export class Database {
     }
 
     createRegister(tableName: string, obj: object): Promise<string> {
-        const insertQuery = `INSERT INTO ${tableName} VALUES (NULL, ?, ?)`;
+        const insertQuery = `INSERT INTO ${tableName} VALUES (NULL, ?, ?, ?)`;
         const query = mysql.format(insertQuery, Object.values(obj));
 
         return this.getMessagePromise(query, `Item created successfully at ${tableName}!`);
