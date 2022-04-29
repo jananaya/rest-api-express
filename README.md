@@ -17,6 +17,7 @@ CREATE TABLE products(
     id INT(11) NOT NULL AUTO_INCREMENT,
     description TEXT NOT NULL,
     value FLOAT NOT NULL,
+    imagePath TEXT NOT NULL,
     PRIMARY KEY (id)
 )
 ```
@@ -26,7 +27,7 @@ La información necesaria para establecer la conexión se configura en `config/.
 
 Una vez iniciado **MySQL**, al ejecutar el comando que se muestra abajo en la raíz del proyecto debería mostrarse un mensaje como `server init in port 3000`, en caso de que todo funcione correctamente:
 ```Bash
-npm run prod
+npm run build
 ```
 Luego de esto ya se pueden efectuar peticiones a la API en `localhost:3000/` desde cualquier cliente HTTP.
 
